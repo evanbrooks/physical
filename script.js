@@ -67,6 +67,9 @@
     };
     i.start = function(e) {
       e.preventDefault();
+
+      finger(e);
+
       // If animating right now
       i.el.style.webkitAnimationPlayState = "paused";
       i.move({x: i.$el.offset().left, y: i.$el.offset().top});
