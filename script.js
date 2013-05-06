@@ -18,25 +18,26 @@
   var box1, gravitator;
 
   $(function(){
-    // doc.body.addEventListener("mousemove", function(e){
-    //   pmouse = mouse;
-    //   mouse = { x: e.pageX, y: e.pageY };
-    // });
-    doc.body.addEventListener("touchmove", function(e){
-      pmouse = mouse;
-      mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
-    });
+    // doc.body.addEventListener("mousemove", cursor, false);
+    doc.body.addEventListener("touchmove", finger, false);
     box1 = new Physical("box1");
-    box1.make_draggable(true); // coasting
     closer = new Physical("close");
-    closer.make_draggable(true); // coasting
 
-    closer.move({x: wind.w + 200, y: wind.h*2/3}).coast();
-
-    box1.move({x: -200, y: wind.h/3}).coast();
+    //closer.move({x: wind.w + 200, y: wind.h*2/3}).coast();
+    //box1.move({x: -200, y: wind.h/3}).coast();
 
     window.onresize = resize;
   });
+
+  function cursor(e) {
+    pmouse = mouse;
+    //   mouse = { x: e.pageX, y: e.pageY };
+  }
+
+  function finger(e) {
+      pmouse = mouse;
+      mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
+  }
 
   function resize() {
     wind = {w: window.innerWidth, h: window.innerHeight};
@@ -199,6 +200,7 @@
         i.el.style.webkitAnimationName = "";
         remove_node(i.anim_id);
       });
+      i.make_draggable(true);
       //i.$el.on("click", i.chat);
     };
     i.initiate();
