@@ -54,6 +54,7 @@
     i.move = function(go) {
       i.pos = { x: go.x,
                 y: go.y };
+      $("#log").html(build_tform(i.pos.x, i.pos.y, i.pos.vel));
       i.el.style.webkitTransform = build_tform(i.pos.x, i.pos.y, i.pos.vel);
       return i;
     };
@@ -252,7 +253,7 @@
     var a = Math.atan2(vel.x,vel.y);
       return "translate3d("+
         ~~(x * 1000)/1000 +"px,"+
-        ~~(y * 1000)/1000 +"px,0)"+
+        ~~(y * 1000)/1000 +"px,0) "+
         "rotate("+ -a +"rad) " +
         "scale(1,"+ v +")"+
         " ";
