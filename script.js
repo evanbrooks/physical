@@ -22,6 +22,10 @@
       pmouse = mouse;
       mouse = { x: e.pageX, y: e.pageY };
     });
+    doc.body.addEventListener("touchmove", function(e){
+      pmouse = mouse;
+      mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageX };
+    });
     box1 = new Physical("box1");
     box1.make_draggable(true); // coasting
     closer = new Physical("close");
@@ -53,11 +57,11 @@
       //i.$el.mousedown(i.start);
       //$html.mouseup(i.end);
       //$html.mousemove(i.drag);
-      i.el.addEventListener('mousedown',i.start,false);
+      //i.el.addEventListener('mousedown',i.start,false);
       i.el.addEventListener('touchstart',i.start,false);
-      doc.body.addEventListener('mouseup',i.end,false);
+      //doc.body.addEventListener('mouseup',i.end,false);
       doc.body.addEventListener('touchend',i.end,false);
-      doc.body.addEventListener('mousemove',i.drag,false);
+      //doc.body.addEventListener('mousemove',i.drag,false);
       doc.body.addEventListener('touchmove',i.drag,false);
     };
     i.start = function(e) {
