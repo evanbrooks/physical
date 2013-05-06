@@ -12,7 +12,8 @@ html {
 body {
   background: #dddddd;
   border-radius: 10px;
-  -webkit-transition: all 0.5s; }
+  -webkit-transition: all 0.5s;
+  -webkit-transform: translate3d(0, 0, 0); }
 
 #log {
   padding-top: 100px; }

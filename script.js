@@ -213,13 +213,11 @@
       i.anim_id = "anim_0";
       i.chatting = false;
       i.el.addEventListener("webkitAnimationEnd", function(){
-        console.log("outer ended");
+        i.el.style.webkitAnimationName = "";
         remove_node(i.anim_id);
       });
       i.inner.addEventListener("webkitAnimationEnd", function(){
         i.inner.style.webkitAnimationName = "";
-        console.log("inner ended");
-        remove_node(i.anim_id);
       });
       i.make_draggable(true);
       //i.$el.on("click", i.chat);
@@ -284,8 +282,8 @@
       return "translate3d("+
         ~~(x * 1000)/1000 +"px,"+
         ~~(y * 1000)/1000 +"px,0) "+
-        "rotate("+ ~~(-a*100)/100 +"rad) " +
-        "scale(1,"+ ~~(v*100)/100 +")"+
+        //"rotate("+ ~~(-a*100)/100 +"rad) " +
+        //"scale(1,"+ ~~(v*100)/100 +")"+
         " ";
   }
 
@@ -312,15 +310,15 @@
       css += ~~(i/len * 10000)/100 + "% {";
       css += "-webkit-transform: " + build_tform(list[i].x, list[i].y, list[i].vel)+";}\n ";
     }
-    css += "}";
+    css += "}\n";
 
     // Build counter-rotate css
-    css += "@-webkit-keyframes "+thing.anim_counter_id+" {";
-    for (i = 0; i < len; i++) {
-      css += ~~(i/len * 10000)/100 + "% {";
-      css += "-webkit-transform: " + build_counter_tform(list[i].vel)+";}\n ";
-    }
-    css += "}";
+    // css += "@-webkit-keyframes "+thing.anim_counter_id+" {";
+    // for (i = 0; i < len; i++) {
+    //   css += ~~(i/len * 10000)/100 + "% {";
+    //   css += "-webkit-transform: " + build_counter_tform(list[i].vel)+";}\n ";
+    // }
+    // css += "}";
 
     return css;
   }
