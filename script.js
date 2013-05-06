@@ -16,10 +16,11 @@
   var pmouse = reset;
   var tick = 1000 / FPS;
   var box1, gravitator;
+  var this_is_an_iphone = isiPhone();
 
   $(function(){
-    doc.body.addEventListener("mousemove", cursor, false);
-    $("body").on("touchmove", finger);
+    if (this_is_an_iphone) $("body").on("touchmove", finger);
+    else                   doc.body.addEventListener("mousemove", cursor, false);
     box1 = new Physical("box1");
     closer = new Physical("close");
 
@@ -63,16 +64,20 @@
       //i.$el.mousedown(i.start);
       //$html.mouseup(i.end);
       //$html.mousemove(i.drag);
-      i.el.addEventListener('mousedown',i.start,false);
-      i.el.addEventListener('touchstart',i.start,false);
-      doc.body.addEventListener('mouseup',i.end,false);
-      doc.body.addEventListener('touchend',i.end,false);
-      doc.body.addEventListener('mousemove',i.drag,false);
-      $("body").on('touchmove',i.drag);
+      if (this_is_an_iphone) {
+        $("body").on('touchmove',i.drag);
+        $("body").on('touchstart',i.start);
+        doc.body.addEventListener('touchend',i.end,false);
+      }
+      else {
+        i.el.addEventListener('mousedown',i.start,false);
+        doc.body.addEventListener('mouseup',i.end,false);
+        doc.body.addEventListener('mousemove',i.drag,false);
+      }
     };
     i.start = function(e) {
       e.preventDefault();
-      finger(e);
+      if (this_is_an_iphone) finger(e);
 
       // If animating right now
       i.el.style.webkitAnimationPlayState = "paused";
@@ -88,6 +93,7 @@
     };
     i.drag = function(e) {
       if (i.am_dragging) {
+
         e.preventDefault();
         i.didnt_move = false;
         if (i.chatting) $("body").removeClass("open");
@@ -310,6 +316,15 @@
   function remove_node(id) {
     n = doc.getElementById(id);
     if (n) n.parentNode.removeChild(n);
+  }
+
+  function isiPhone(){
+    return (
+        //Detect iPhone
+        (navigator.platform.indexOf("iPhone") != -1) ||
+        //Detect iPod
+        (navigator.platform.indexOf("iPod") != -1)
+    );
   }
 
 // })();
