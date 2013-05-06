@@ -54,8 +54,11 @@
       //$html.mouseup(i.end);
       //$html.mousemove(i.drag);
       i.el.addEventListener('mousedown',i.start,false);
+      i.el.addEventListener('touchstart',i.start,false);
       doc.body.addEventListener('mouseup',i.end,false);
+      doc.body.addEventListener('touchend',i.end,false);
       doc.body.addEventListener('mousemove',i.drag,false);
+      doc.body.addEventListener('touchmove',i.drag,false);
     };
     i.start = function() {
       // If animating right now
