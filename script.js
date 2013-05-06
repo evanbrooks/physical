@@ -117,9 +117,18 @@
         }
       }
     };
+    function reachedWall() {
+        return ( Math.abs(i.vel.x) < 0.1 && Math.abs(i.vel.y) < 0.1 &&
+             (Math.abs(i.pos.x - inset.x) < 0.1 || Math.abs(i.pos.x - (wind.w - inset.x)) < 0.1));
+    }
+
+    function reachedTarget() {
+        return ( Math.abs(i.vel.x) + Math.abs(i.vel.y) < 0.1 &&
+                 Math.abs(i.xdist) + Math.abs(i.ydist) < 0.1 );
+    }
     i.coast = function() {
-      var done = false;
-      while (!done) {
+      while ( (  i.chatting && !reachedTarget() ) ||
+              ( !i.chatting && !reachedWall()   ) ) {
         // spring towards center of gravity
         i.ydist = Math.abs(i.targ.y - i.pos.y);
         i.xdist = Math.abs(i.targ.x - i.pos.x);
@@ -145,19 +154,10 @@
         i.pos.vel = {x: i.vel.x, y: i.vel.y};
         i.move(i.pos);
         i.anim_list.push(i.pos);
-        if (i.chatting) {
-          if ( Math.abs(i.vel.x) + Math.abs(i.vel.y) < 0.1 &&
-               Math.abs(i.xdist) + Math.abs(i.ydist) < 0.1 ) {
-            done = true;
-          }
-        }
-        else {
-          if ( Math.abs(i.vel.x) < 0.1 && Math.abs(i.vel.y) < 0.1 &&
-               (Math.abs(i.pos.x - inset.x) < 0.1 || Math.abs(i.pos.x - (wind.w - inset.x)) < 0.1)) {
-            done = true;
-          }
-        }
+
+        console.log("I am looping");
       }
+
       //$head.append(build_css(i, i.anim_list));
 
       var css = build_css(i, i.anim_list);
