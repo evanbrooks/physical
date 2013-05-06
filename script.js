@@ -271,9 +271,9 @@
   // ----------------------
   function get_time() {
     if (this_is_an_iphone) {
-      var time;
-      window.webkitRequestAnimationFrame(function(t){ time = t; });
-      return time;
+      //var time;
+      //window.webkitRequestAnimationFrame(function(t){ time = t; });
+      return new Date().getTime();
     }
     else return performance.now();
   }
