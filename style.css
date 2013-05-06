@@ -56,7 +56,7 @@ nav {
     margin: -40px;
     border-radius: 50%;
     background: gray;
-    background-image: url(http://placedog.com/81/80);
+    background-image: url(http://placekitten.com/81/80);
     -webkit-transition: all 0.1s;
     box-shadow: inset 0 0 0 3px white, inset 0 1px 2px 5px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.2); }
     .head .inner:active {
@@ -97,4 +97,4 @@ nav {
   -webkit-transform: scale(1); }
 
 #close .inner {
-  background-image: url(http://placedog.com/80/80); }
+  background-image: url(http://placekitten.com/80/80); }

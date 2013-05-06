@@ -272,15 +272,15 @@
       return "translate3d("+
         ~~(x * 1000)/1000 +"px,"+
         ~~(y * 1000)/1000 +"px,0) "+
-        "rotate("+ -a +"rad) " +
-        "scale(1,"+ v +")"+
+        "rotate("+ ~~(-a*100)/100 +"rad) " +
+        "scale(1,"+ ~~(v*100)/100 +")"+
         " ";
   }
 
   function build_counter_tform(vel) {
     vel = typeof vel !== 'undefined' ? vel : {x: 0, y: 0};
     var a = Math.atan2(vel.x,vel.y);
-      return "rotate("+ a +"rad) ";
+      return "rotate("+ ~~(a*100)/100 +"rad) ";
   }
 
 
