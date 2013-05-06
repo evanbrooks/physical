@@ -18,25 +18,27 @@
   var box1, gravitator;
 
   $(function(){
-    // doc.body.addEventListener("mousemove", cursor, false);
+    doc.body.addEventListener("mousemove", cursor, false);
     doc.body.addEventListener("touchmove", finger, false);
     box1 = new Physical("box1");
     closer = new Physical("close");
 
-    //closer.move({x: wind.w + 200, y: wind.h*2/3}).coast();
-    //box1.move({x: -200, y: wind.h/3}).coast();
+    closer.move({x: wind.w + 200, y: wind.h*2/3}).coast();
+    box1.move({x: -200, y: wind.h/3}).coast();
 
     window.onresize = resize;
   });
 
   function cursor(e) {
     pmouse = mouse;
-    //   mouse = { x: e.pageX, y: e.pageY };
+    mouse = { x: e.pageX, y: e.pageY };
   }
 
   function finger(e) {
+    if (e.changedTouches) {
       pmouse = mouse;
       mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
+    }
   }
 
   function resize() {
@@ -58,16 +60,15 @@
       //i.$el.mousedown(i.start);
       //$html.mouseup(i.end);
       //$html.mousemove(i.drag);
-      //i.el.addEventListener('mousedown',i.start,false);
+      i.el.addEventListener('mousedown',i.start,false);
       i.el.addEventListener('touchstart',i.start,false);
-      //doc.body.addEventListener('mouseup',i.end,false);
+      doc.body.addEventListener('mouseup',i.end,false);
       doc.body.addEventListener('touchend',i.end,false);
-      //doc.body.addEventListener('mousemove',i.drag,false);
-      doc.body.addEventListener('touchmove',i.drag,false);
+      doc.body.addEventListener('mousemove',i.drag,false);
+      $("body").on('touchmove',i.drag,false);
     };
     i.start = function(e) {
       e.preventDefault();
-
       finger(e);
 
       // If animating right now
