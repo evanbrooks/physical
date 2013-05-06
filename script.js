@@ -36,9 +36,9 @@
   }
 
   function finger(e) {
-    if (e.changedTouches) {
+    if (e.originalEvent.changedTouches) {
       pmouse = mouse;
-      mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
+      mouse = { x: e.originalEvent.changedTouches[0].pageX, y: e.originalEvent.changedTouches[0].pageY };
       $("nav").html(mouse.x + " | " + mouse.y);
     }
   }
