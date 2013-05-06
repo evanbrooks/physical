@@ -32,12 +32,14 @@
   function cursor(e) {
     pmouse = mouse;
     mouse = { x: e.pageX, y: e.pageY };
+    $("nav").html(mouse.x + " | " + mouse.y);
   }
 
   function finger(e) {
     if (e.changedTouches) {
       pmouse = mouse;
       mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
+      $("nav").html(mouse.x + " | " + mouse.y);
     }
   }
 
