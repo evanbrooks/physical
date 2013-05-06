@@ -19,7 +19,7 @@
   var this_is_an_iphone = isiPhone();
 
   $(function(){
-    if (this_is_an_iphone) $("body").on("touchmove", finger);
+    if (this_is_an_iphone) x = 1; //$("body").on("touchmove", finger);
     else                   doc.body.addEventListener("mousemove", cursor, false);
     box1 = new Physical("box1");
     closer = new Physical("close");
@@ -92,9 +92,8 @@
       i.didnt_move = true;
     };
     i.drag = function(e) {
+      if (this_is_an_iphone) finger(e);
       if (i.am_dragging) {
-
-        e.preventDefault();
         i.didnt_move = false;
         if (i.chatting) $("body").removeClass("open");
         i.currT = performance.now();
