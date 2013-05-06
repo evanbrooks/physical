@@ -12,8 +12,8 @@
   var doc = document;
   var reset = {x:0, y:0};
   var wind = {w: window.innerWidth, h: window.innerHeight};
-  var mouse = reset;
-  var pmouse = reset;
+  var mouse = {x:0, y:0};
+  var pmouse = {x:0, y:0};
   var tick = 1000 / FPS;
   var box1, gravitator;
   var this_is_an_iphone = isiPhone();
@@ -84,7 +84,7 @@
       i.move({x: i.$el.offset().left, y: i.$el.offset().top});
       i.el.style.webkitAnimationName = "";
       i.inner.style.webkitAnimationName = "";
-      i.vel = reset;
+      i.vel = {x:0, y:0};
 
       // Begin drag
       i.off = {x: mouse.x - i.pos.x, y: mouse.y - i.pos.y};
@@ -119,18 +119,25 @@
     };
     function reachedWall() {
         return ( Math.abs(i.vel.x) < 0.1 && Math.abs(i.vel.y) < 0.1 &&
-             (Math.abs(i.pos.x - inset.x) < 0.1 || Math.abs(i.pos.x - (wind.w - inset.x)) < 0.1));
+             (Math.abs(i.pos.x - inset.x) < 0.5 || Math.abs(i.pos.x - (wind.w - inset.x)) < 0.5));
     }
 
     function reachedTarget() {
-        return ( Math.abs(i.vel.x) + Math.abs(i.vel.y) < 0.1 &&
-                 Math.abs(i.xdist) + Math.abs(i.ydist) < 0.1 );
+        return ( Math.abs(i.vel.x) + Math.abs(i.vel.y) < 0.5 &&
+                 Math.abs(i.xdist) + Math.abs(i.ydist) < 0.5 );
     }
     i.coast = function() {
       var counter = 0;
       while ( (  i.chatting && !reachedTarget() ) ||
               ( !i.chatting && !reachedWall()   ) ) {
         // spring towards center of gravity
+
+        console.log("--");
+        console.log("pos");
+        console.log(i.pos);
+        console.log("vel");
+        console.log(i.vel);
+
         i.ydist = Math.abs(i.targ.y - i.pos.y);
         i.xdist = Math.abs(i.targ.x - i.pos.x);
         i.dist = Math.sqrt(i.xdist*i.xdist + i.ydist*i.ydist);
@@ -206,9 +213,9 @@
       i.inner = i.el.getElementsByClassName("inner")[0];
       i.physics = false;
       i.size = {w: i.el.offsetWidth, h: i.el.offsetHeight};
-      i.pos = reset;
-      i.vel = reset;
-      i.targ = reset;
+      i.pos = {x:0, y:0};
+      i.vel = {x:0, y:0};
+      i.targ = {x:0, y:0};
       i.T = 0;
       i.anim_list = [];
       i.lastT = 0;
@@ -255,6 +262,13 @@
     }
     i.vel.x += springiness;
     i.vel.y += yspring;
+  }
+
+  // Reset
+  // -----
+  function reset(obj) {
+    obj.x = 0;
+    obj.y = 0;
   }
 
 
