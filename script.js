@@ -60,7 +60,8 @@
       doc.body.addEventListener('mousemove',i.drag,false);
       doc.body.addEventListener('touchmove',i.drag,false);
     };
-    i.start = function() {
+    i.start = function(e) {
+      e.preventDefault();
       // If animating right now
       i.el.style.webkitAnimationPlayState = "paused";
       i.move({x: i.$el.offset().left, y: i.$el.offset().top});
@@ -73,8 +74,9 @@
       i.am_dragging = true;
       i.didnt_move = true;
     };
-    i.drag = function() {
+    i.drag = function(e) {
       if (i.am_dragging) {
+        e.preventDefault();
         i.didnt_move = false;
         if (i.chatting) $("body").removeClass("open");
         i.currT = performance.now();
