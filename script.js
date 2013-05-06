@@ -127,6 +127,7 @@
                  Math.abs(i.xdist) + Math.abs(i.ydist) < 0.1 );
     }
     i.coast = function() {
+      var counter = 0;
       while ( (  i.chatting && !reachedTarget() ) ||
               ( !i.chatting && !reachedWall()   ) ) {
         // spring towards center of gravity
@@ -155,7 +156,11 @@
         i.move(i.pos);
         i.anim_list.push(i.pos);
 
-        console.log("I am looping");
+        counter++;
+        if (counter > 120) {
+          console.log("Looped more than 120 times: cancelling!");
+          break;
+        }
       }
 
       //$head.append(build_css(i, i.anim_list));
