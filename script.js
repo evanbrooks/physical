@@ -47,8 +47,6 @@
 
   function resize() {
     wind = {w: window.innerWidth, h: window.innerHeight};
-    box1.set_edges();
-    close.set_edges();
   }
 
   function Physical(selector) {
@@ -183,10 +181,6 @@
       i.move(i.pos);
 
     };
-    i.set_edges = function() {
-      // i.edge = {w: wind.w - i.size.w, h: wind.h - i.size.h};
-      i.edge = {w: wind.w, h: wind.h};
-    };
     i.chat = function() {
       if (!i.chatting) {
         i.chatting = true;
@@ -217,10 +211,14 @@
       i.lastT = 0;
       i.currT = 0;
       i.anim_id = "anim_0";
-      i.set_edges();
       i.chatting = false;
       i.el.addEventListener("webkitAnimationEnd", function(){
-        i.el.style.webkitAnimationName = "";
+        console.log("outer ended");
+        remove_node(i.anim_id);
+      });
+      i.inner.addEventListener("webkitAnimationEnd", function(){
+        i.inner.style.webkitAnimationName = "";
+        console.log("inner ended");
         remove_node(i.anim_id);
       });
       i.make_draggable(true);
