@@ -19,7 +19,7 @@
 
   $(function(){
     doc.body.addEventListener("mousemove", cursor, false);
-    doc.body.addEventListener("touchmove", finger, false);
+    $("body").on("touchmove", finger);
     box1 = new Physical("box1");
     closer = new Physical("close");
 
@@ -68,7 +68,7 @@
       doc.body.addEventListener('mouseup',i.end,false);
       doc.body.addEventListener('touchend',i.end,false);
       doc.body.addEventListener('mousemove',i.drag,false);
-      $("body").on('touchmove',i.drag,false);
+      $("body").on('touchmove',i.drag);
     };
     i.start = function(e) {
       e.preventDefault();
