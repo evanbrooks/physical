@@ -152,9 +152,8 @@
         i.pos.x += i.vel.x * tick;
         i.pos.y += i.vel.y * tick;
 
-        i.pos.vel = {x: i.vel.x, y: i.vel.y};
-        i.move(i.pos);
-        i.anim_list.push(i.pos);
+        var copied = {x: i.pos.x, y: i.pos.y, vel: {x:i.vel.x, y:i.vel.y}};
+        i.anim_list.push(copied);
 
         counter++;
         if (counter > 120) {
@@ -176,6 +175,10 @@
       i.inner.style.webkitAnimationName = i.anim_counter_id;
       i.inner.style.webkitAnimationDuration = t +"s";
       i.inner.style.webkitAnimationTimingFunction = "linear";
+
+      // Move to end position for when animation has completed
+      i.move(i.pos);
+
     };
     i.set_edges = function() {
       // i.edge = {w: wind.w - i.size.w, h: wind.h - i.size.h};
