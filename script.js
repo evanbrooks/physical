@@ -33,14 +33,14 @@
   function cursor(e) {
     pmouse = mouse;
     mouse = { x: e.pageX, y: e.pageY };
-    $("nav").html(mouse.x + " | " + mouse.y);
+    //$("nav").html(mouse.x + " | " + mouse.y);
   }
 
   function finger(e) {
     if (e.originalEvent.changedTouches) {
       pmouse = mouse;
       mouse = { x: e.originalEvent.changedTouches[0].pageX, y: e.originalEvent.changedTouches[0].pageY };
-      $("nav").html(mouse.x + " | " + mouse.y);
+      //$("nav").html(mouse.x + " | " + mouse.y);
     }
   }
 
@@ -55,7 +55,7 @@
     i.move = function(go) {
       i.pos = { x: go.x,
                 y: go.y };
-      $("#log").html(build_tform(i.pos.x, i.pos.y, i.pos.vel));
+      //$("#log").html(build_tform(i.pos.x, i.pos.y, i.pos.vel));
       i.el.style.webkitTransform = build_tform(i.pos.x, i.pos.y, i.pos.vel);
       return i;
     };
@@ -65,8 +65,8 @@
       //$html.mouseup(i.end);
       //$html.mousemove(i.drag);
       if (this_is_an_iphone) {
-        $("body").on('touchmove',i.drag);
-        $("body").on('touchstart',i.start);
+        doc.body.addEventListener('touchmove',i.drag,false);
+        i.el.addEventListener('touchstart',i.start,false);
         doc.body.addEventListener('touchend',i.end,false);
       }
       else {
