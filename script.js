@@ -18,13 +18,13 @@
   var box1, gravitator;
 
   $(function(){
-    doc.body.addEventListener("mousemove", function(e){
-      pmouse = mouse;
-      mouse = { x: e.pageX, y: e.pageY };
-    });
+    // doc.body.addEventListener("mousemove", function(e){
+    //   pmouse = mouse;
+    //   mouse = { x: e.pageX, y: e.pageY };
+    // });
     doc.body.addEventListener("touchmove", function(e){
       pmouse = mouse;
-      mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageX };
+      mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
     });
     box1 = new Physical("box1");
     box1.make_draggable(true); // coasting
