@@ -159,8 +159,8 @@
         i.anim_list.push(copied);
 
         counter++;
-        if (counter > 120) {
-          console.log("Looped more than 120 times: cancelling!");
+        if (counter > 1000) {
+          console.log("Looped more than 1000 times: cancelling!");
           break;
         }
       }
@@ -271,12 +271,8 @@
   // Time utility functions
   // ----------------------
   function get_time() {
-    if (this_is_an_iphone) {
-      //var time;
-      //window.webkitRequestAnimationFrame(function(t){ time = t; });
-      return new Date().getTime();
-    }
-    else return performance.now();
+    if (window.performance) return performance.now();
+    else return Date.now();
   }
 
 
