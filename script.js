@@ -6,7 +6,7 @@
   var targ_spring_constant = 0.0015;
   var stretch_constant = 0.1;
   var FPS = 60;
-  var inset = {x: 30, y: 40};
+  var inset = {x: 30, y: 50};
 
   // Utilities
   var doc = document;
@@ -96,7 +96,7 @@
       if (i.am_dragging) {
         i.didnt_move = false;
         if (i.chatting) $("body").removeClass("open");
-        i.currT = performance.now();
+        i.currT = get_time();
         i.T =  i.currT - i.lastT;
         i.vel = {x: (mouse.x - pmouse.x)/i.T, y: (mouse.y - pmouse.y)/i.T};
         i.move({ x:mouse.x - i.off.x, y: mouse.y - i.off.y });
@@ -248,6 +248,19 @@
     i.vel.x += springiness;
     i.vel.y += yspring;
   }
+
+
+  // Time utility functions
+  // ----------------------
+  function get_time() {
+    if (this_is_an_iphone) {
+      var time;
+      window.webkitRequestAnimationFrame(function(t){ time = t; });
+      return time;
+    }
+    else return performance.now();
+  }
+
 
   // Transformation Utility functions
   // --------------------------------
