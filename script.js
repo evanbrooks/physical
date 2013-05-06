@@ -5,7 +5,7 @@
   var spring_constant = 0.0008;
   var targ_spring_constant = 0.0015;
   var stretch_constant = 0.1;
-  var FPS = 60;
+  var FPS = 30;
   var inset = {x: 30, y: 50};
 
   // Utilities
