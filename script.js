@@ -97,6 +97,7 @@
         i.didnt_move = false;
         if (i.chatting) $("body").removeClass("open");
         i.currT = get_time();
+        console.log(i.currT);
         i.T =  i.currT - i.lastT;
         i.vel = {x: (mouse.x - pmouse.x)/i.T, y: (mouse.y - pmouse.y)/i.T};
         i.move({ x:mouse.x - i.off.x, y: mouse.y - i.off.y });
@@ -131,12 +132,6 @@
       while ( (  i.chatting && !reachedTarget() ) ||
               ( !i.chatting && !reachedWall()   ) ) {
         // spring towards center of gravity
-
-        console.log("--");
-        console.log("pos");
-        console.log(i.pos);
-        console.log("vel");
-        console.log(i.vel);
 
         i.ydist = Math.abs(i.targ.y - i.pos.y);
         i.xdist = Math.abs(i.targ.x - i.pos.x);
