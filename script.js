@@ -37,6 +37,7 @@
   }
 
   function finger(e) {
+    e.preventDefault();
     if (e.changedTouches) {
       pmouse = mouse;
       mouse = { x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY };
@@ -97,7 +98,7 @@
         i.didnt_move = false;
         if (i.chatting) $("body").removeClass("open");
         i.currT = get_time();
-        console.log(i.currT);
+        // console.log(i.currT);
         i.T =  i.currT - i.lastT;
         i.vel = {x: (mouse.x - pmouse.x)/i.T, y: (mouse.y - pmouse.y)/i.T};
         i.move({ x:mouse.x - i.off.x, y: mouse.y - i.off.y });
